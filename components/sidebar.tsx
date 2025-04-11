@@ -239,7 +239,7 @@ const mainNavItems = [
   },
   {
     title: "CV Rebrander",
-    href: "/cv-reviewer",
+    href: "/  ",
     icon: FileText,
   },
   {
@@ -320,6 +320,8 @@ export function Sidebar() {
 function SidebarContent({ pathname }: { pathname: string }) {
   const { user, logout } = useAuth();
 
+  type ExtendedUser = typeof user & { profileImage?: string };
+  const extendedUser = user as ExtendedUser;
   // Generate initials from user name
   const getInitials = (name: string | undefined) => {
     if (!name) return "AU";
@@ -446,13 +448,13 @@ function SidebarContent({ pathname }: { pathname: string }) {
       <div className="border-t p-4 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 flex items-center justify-between">
         {/* User profile in bottom left */}
         <div className="flex items-center gap-2">
-          <Avatar className="h-8 w-8">
-            {user?.profileImage ? (
-              <AvatarImage src={user.profileImage} alt={user?.name || "User"} />
-            ) : (
-              <AvatarFallback>{getInitials(user?.name)}</AvatarFallback>
-            )}
-          </Avatar>
+        <Avatar className="h-8 w-8">
+    {extendedUser?.profileImage ? (
+      <AvatarImage src={extendedUser.profileImage} alt={extendedUser?.name || "User"} />
+    ) : (
+      <AvatarFallback>{getInitials(extendedUser?.name)}</AvatarFallback>
+    )}
+  </Avatar>
           
         </div>
         

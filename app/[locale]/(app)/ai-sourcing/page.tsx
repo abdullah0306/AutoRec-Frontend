@@ -19,10 +19,14 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
+type EyeStatesType = {
+  [key: number]: boolean;
+};
+
 export default function AISourcePage() {
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("Overview");
-  const [eyeStates, setEyeStates] = useState({});
+  const [eyeStates, setEyeStates] = useState<EyeStatesType>({});
 
   useEffect(() => {
     // Simulate loading data
@@ -31,14 +35,14 @@ export default function AISourcePage() {
     }, 1000);
 
     // Initialize eye states for all candidates
-    const initialEyeStates = {};
+    const initialEyeStates:EyeStatesType = {};
     candidateRecommendations.forEach((_, index) => {
       initialEyeStates[index] = true; // true means eye is open
     });
     setEyeStates(initialEyeStates);
   }, []);
 
-  const toggleEye = (index) => {
+  const toggleEye = (index:any) => {
     setEyeStates(prev => ({
       ...prev,
       [index]: !prev[index]
@@ -326,56 +330,55 @@ export default function AISourcePage() {
         </div>
 
         {/* AI Sourcing Preferences */}
-        {/* AI Sourcing Preferences */}
         <div className="space-y-4">
           <div>
             <h2 className="text-lg font-semibold">AI Sourcing Preferences</h2>
           </div>
           <div className="grid grid-cols-1 gap-6">
             {/* Skills Priority */}
-            <div className="bg-white rounded-lg shadow-sm px-4 py-3">
+            <div className="px-4 py-3">
               <h4 className="text-sm font-medium mb-2">Skills Priority</h4>
               <div className="relative">
                 <Input
                   type="text"
                   value={sourcingPreferences.skillsPriority}
                   onChange={(e) => setSourcingPreferences({ ...sourcingPreferences, skillsPriority: e.target.value })}
-                  className="pr-8"
+                  className="pr-8 rounded-3xl"
                 />
-                <Button variant="ghost" size="icon" className="h-8 w-8 absolute right-0 top-0">
+                <Button variant="ghost" size="icon" className="h-8 w-8 absolute right-1 top-0">
                   <Edit className="h-4 w-4" />
                 </Button>
               </div>
             </div>
 
             {/* Experience Level */}
-            <div className="bg-white rounded-lg shadow-sm px-4 py-3">
+            <div className=" px-4 py-3">
               <h4 className="text-sm font-medium mb-2">Experience Level</h4>
               <div className="relative">
                 <Input
                   type="text"
                   value={sourcingPreferences.experienceLevel}
                   onChange={(e) => setSourcingPreferences({ ...sourcingPreferences, experienceLevel: e.target.value })}
-                  className="pr-8"
+                  className="pr-8 rounded-3xl"
                 />
-                <Button variant="ghost" size="icon" className="h-8 w-8 absolute right-0 top-0">
+                <Button variant="ghost" size="icon" className="h-8 w-8 absolute right-1 top-0">
                   <Edit className="h-4 w-4" />
                 </Button>
               </div>
             </div>
 
             {/* Location Preferences */}
-            <div className="bg-white rounded-lg shadow-sm px-4 py-3">
+            <div className="px-4 py-3">
               <h4 className="text-sm font-medium mb-2">Location Preferences</h4>
               <div className="relative">
                 <Input
                   type="text"
                   value={sourcingPreferences.locationPreferences}
                   onChange={(e) => setSourcingPreferences({ ...sourcingPreferences, locationPreferences: e.target.value })}
-                  className="pr-8"
+                  className="pr-8 rounded-3xl"
                 />
-                <Button variant="ghost" size="icon" className="h-8 w-8 absolute right-0 top-0">
-                  <Edit className="h-4 w-4" />
+                <Button variant="ghost" size="icon" className="h-8 w-8 absolute right-1 top-0">
+                  <Edit className="h-4 w-4 " />
                 </Button>
               </div>
             </div>
